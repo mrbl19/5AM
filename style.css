@@ -1,0 +1,126 @@
+/* Deep Cherry: #7A2E2E
+Muted Butter: #E5C86B
+Ivory: #FBF6EC
+Light Mocha: #8A6A5A */
+
+/* Reset some default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* makes sizing predictable */
+}
+
+body {
+    margin: 0;
+    font-family: 'Georgia', sans-serif;
+    font-size: 16px;       /* comfortable reading size */
+    line-height: 1.5;      /* airy spacing for readability */
+    background-color:#FBF6EC;
+    color:#352f2c;
+}
+ 
+header {
+    background-color:#7A2E2E;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    color:#E5C86B;
+}
+
+nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+}
+
+.hero {
+    text-align: center;
+    padding: 100px 20px;
+    background-color: #FBF6EC;
+}
+
+.hero h2 {
+    font-size: 2rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    margin-top: 20px;
+    background-color: #E5C86B;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.intro {
+    padding: 40px;
+    text-align: center;
+}
+
+footer {
+    background-color: #7A2E2E;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.sun-wrapper {
+  text-align: center;    /* centers text inside wrapper */
+  margin: 0 auto;      /* vertical spacing */
+}
+/* container cuts off bottom half of sun to make 
+it a ~rising~ sun */
+.sun-container {
+  position: relative;
+  width: 240px;
+  height: 120px; /* half-sun height */
+  margin: 0 auto 1em auto;
+  overflow: hidden; 
+}
+
+.sun {
+  position: absolute;
+  bottom: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 190px;
+  background: radial-gradient(circle at bottom, #FFD166, #F4A261);
+  border-radius: 50%;
+  box-shadow: 0 0 0px #FFD166;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* Glow effect when active */
+.sun.glow {
+  box-shadow: 0 0 20px 10px #FFD166;
+  transform: translateX(-50%) scale(1.05);
+}
+
+/* text overlay */
+.sun-text {
+  position: absolute; /* overlay sun */
+  top: 68%;           /* adjust to sit nicely over sun */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;         /* above sun */
+  /* font-family: 'Palatino Linotype', 'Book Antiqua', serif; */
+  font-size: 1.4rem;
+  color: #4b3e2b;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap; /* keep text on one line */
+}
+
