@@ -74,7 +74,7 @@
 </style>
 
 <button type="button" onclick="goToCheckout()">
-  Review Order
+  review order
 </button>
 
 <script>
@@ -250,13 +250,17 @@ function resetCart() {
 function goToCheckout() {
   const errorEl = document.getElementById("cart-error");
 
-  // clear any previous error
-  errorEl.textContent = "";
+  if (errorEl) errorEl.textContent = "";
 
   if (!cart || cart.length === 0) {
-    errorEl.textContent = "Your cart is empty—add something delicious first!";
+    if (errorEl) {
+      errorEl.textContent = "Your cart is empty!";
+    }
     return;
   }
+
+  // ensure it's saved before navigation
+  localStorage.setItem("cart", JSON.stringify(cart));
 
   window.location.href = "checkout.html";
 }
