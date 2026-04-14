@@ -78,6 +78,18 @@ footer {
     padding: 0 0px;
 }
 
+.image-row {
+  display: flex;
+  justify-content: center; /* centers horizontally */
+  gap: 15px;
+}
+
+.image-row img {
+  width: 290px;   /* adjust size here */
+  height: auto;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
 .sun-wrapper {
   text-align: center;    /* centers text inside wrapper */
   margin: 0 auto;      /* vertical spacing */
