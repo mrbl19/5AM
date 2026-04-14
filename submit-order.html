@@ -18,10 +18,250 @@
     </nav>
 </header>
 
-<section class="hero">
-    <h3>Coming Soon!!</h3>
-</section>
+<h3>Order Items</h3>
+<p id="page-message"></p>
 
+<form>
+    
+<label>item:</label>
+<select id="item" onchange="toggleAssorted()">
+  <option value="apple fritter cookies 4-pack">apple fritter cookies 4-pack</option>
+  <option value="apple fritter cookies 8-pack">apple fritter cookies 8-pack</option>
+  <option value="golden cream milk bread buns 4-pack">golden cream milk bread buns 4-pack</option>
+  <option value="cinnamon milk bread buns 4-pack">cinnamon milk bread buns 4-pack</option>
+  <option value="assorted cookies 4-pack">assorted cookies 4-pack</option>
+  <option value="assorted cookies 8-pack">assorted cookies 8-pack</option>
+  <option value="cinnamon milk bread loaf">cinnamon milk bread loaf</option>
+
+</select>
+
+<label>quantity:</label>
+<input type="number" id="qty" min="1" value="1">
+
+<!-- Assorted options -->
+<div id="assortedOptions" style="display:none; margin-top:10px;">
+  <p><strong>Choose cookies for assorted pack:</strong></p>
+
+  Chocolate Chip:
+  <input type="number" class="assorted" data-name="Chocolate Chip" min="0" value="0"><br>
+
+  Red Velvet:
+  <input type="number" class="assorted" data-name="Red Velvet" min="0" value="0"><br>
+
+  Sugar:
+  <input type="number" class="assorted" data-name="Sugar" min="0" value="0"><br>
+
+  <p id="error" style="color:red;"></p>
+</div>
+
+<button type="button" onclick="addToCart()">add to cart</button>
+
+<hr>
+
+<h3>your cart</h3>
+<!-- <button type="button" onclick="resetCart()">clear cart</button> -->
+<ul id="cart"></ul>
+
+<input type="hidden" name="order_summary" id="order_summary">
+
+<div id="cart-error" class="error-message"></div>
+<style>
+.error-message {
+  color: #c0392b;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+</style>
+
+<button type="button" onclick="goToCheckout()">
+  Review Order
+</button>
+
+<script>
+
+let mode = "normal";
+
+function updatePage() {
+  const message = document.getElementById("page-message");
+
+  if (mode === "normal") {
+    message.innerHTML = `
+      Pre-orders are available for pickup at the farmers market but aren't required.
+      Walk-ups are welcome. Pre-ordering simply ensures you get exactly what you want.<br><br>
+      
+      Are you a CERL employee? 
+      <a href="#" onclick="setCerlMode(); return false;">Click here</a>.<br><br>
+
+      Order request are accepted based on capacity and are not guaranteed.
+      Payment is collected after order confirmation or at the time of pickup.<br><br> 
+    `;
+  } 
+  else if (mode === "cerl") {
+    message.innerHTML = `
+      CERL employees only: Office delivery is available on select Fridays. Orders will be delivered between 12:00-1:00pm. Place your order below!<br><br>
+
+      Clicked the wrong thing? 
+      <a href="#" onclick="setNormalMode(); return false;">Go back here</a>.<br><br>
+    `;
+  } 
+}
+
+function setCerlMode() {
+  mode = "cerl";
+  updatePage();
+}
+
+function setNormalMode() {
+  mode = "normal";
+  updatePage();
+}
+
+updatePage(); // run on load
+
+let cart = [];
+const BOX_RULES = {
+  "assorted cookies 4-pack": 4,
+  "assorted cookies 8-pack": 8,
+};
+
+function isAssortedBoxItem(item) {
+  return BOX_RULES[item] !== undefined;
+}
+
+function getAssortedBoxSize(item) {
+  return BOX_RULES[item];
+}
+
+function toggleAssorted() {
+  const item = document.getElementById("item").value;
+  const box = document.getElementById("assortedOptions");
+
+  const isAssorted = isAssortedBoxItem(item);
+
+  box.style.display = isAssorted ? "block" : "none";
+
+  // reset inputs when switching away
+  if (!isAssorted) {
+    document.querySelectorAll(".assorted").forEach(input => {
+      input.value = 0;
+    });
+
+    document.getElementById("error").textContent = "";
+  }
+}
+
+function getAssortedBreakdown() {
+  const inputs = document.querySelectorAll(".assorted");
+  let total = 0;
+  let breakdown = [];
+
+  inputs.forEach(input => {
+    const qty = parseInt(input.value) || 0;
+    if (qty > 0) {
+      breakdown.push(`${qty} ${input.dataset.name}`);
+    }
+    total += qty;
+  });
+
+  return { total, breakdown };
+}
+
+function updateCartError() {
+  const errorEl = document.getElementById("cart-error");
+
+  if (cart && cart.length > 0) {
+    errorEl.textContent = "";
+  }
+}
+
+function addToCart() {
+  const item = document.getElementById("item").value;
+  const qty = parseInt(document.getElementById("qty").value);
+  const errorEl = document.getElementById("error");
+
+  // BOX ITEM (assorted, customizable)
+  if (isAssortedBoxItem(item)) {
+    const boxSize = getAssortedBoxSize(item);
+    const { total, breakdown } = getAssortedBreakdown();
+
+    if (total !== boxSize) {
+      errorEl.textContent = `This box must equal exactly ${boxSize} cookies.`;
+      return;
+    }
+
+    errorEl.textContent = "";
+
+    cart.push({
+      item,
+      qty,
+      details: breakdown.join(", "),
+      type: "box"
+    });
+
+  } 
+  // NORMAL ITEM
+  else {
+    cart.push({
+      item,
+      qty,
+      type: "single"
+    });
+  }
+
+  renderCart();
+  updateCartError();
+}
+
+function renderCart() {
+  const cartList = document.getElementById("cart");
+  cartList.innerHTML = "";
+
+  cart.forEach((entry, index) => {
+    const li = document.createElement("li");
+
+    li.innerHTML = `
+      ${entry.qty} x ${entry.item}
+      ${entry.details ? `<br><small>${entry.details}</small>` : ""}
+      <button type="button" onclick="removeItem(${index})">remove item</button>
+    `;
+
+    cartList.appendChild(li);
+  });
+
+  const summary = cart.map(e =>
+    e.details
+      ? `${e.qty} x ${e.item} (${e.details})`
+      : `${e.qty} x ${e.item}`
+  );
+
+  document.getElementById("order_summary").value = summary.join(" | ");
+}
+
+function removeItem(index) {
+  cart.splice(index, 1);
+  renderCart();
+}
+
+function resetCart() {
+  cart = [];
+  renderCart();
+}
+
+function goToCheckout() {
+  const errorEl = document.getElementById("cart-error");
+
+  // clear any previous error
+  errorEl.textContent = "";
+
+  if (!cart || cart.length === 0) {
+    errorEl.textContent = "Your cart is empty—add something delicious first!";
+    return;
+  }
+
+  window.location.href = "checkout.html";
+}
+
+</script>
 
 <footer>
     <p>© 2026 5am Bakery</p>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>5am Bakery</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<header>
+    <h1>5am Bakery</h1>
+</header>
+
+<h2>Review Your Order</h2>
+
+<ul id="orderSummary"></ul>
+
+<button type="button" onclick="restartOrder()">
+  Restart order
+</button>
+
+<h3>Contact Info</h3>
+
+<form
+  action="https://formspree.io/f/xojyqdwv"
+  method="POST">
+
+  <input type="text" name="name" placeholder="Your Name" required><br><br>
+  <input type="email" name="email" placeholder="Email" required><br><br>
+
+  <input type="hidden" name="order_summary" id="order_summary">
+
+  <button type="submit">Place Order</button>
+
+</form>
+
+<script>
+function restartOrder() {
+  localStorage.removeItem("cart"); // clears current order
+  window.location.href = "submit-order.html"; // go back to start
+}
+
+const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+const list = document.getElementById("orderSummary");
+
+cart.forEach(item => {
+  const li = document.createElement("li");
+  li.textContent =
+    item.details
+      ? `${item.qty} x ${item.item} (${item.details})`
+      : `${item.qty} x ${item.item}`;
+  list.appendChild(li);
+});
+
+// send full cart in email
+document.getElementById("order_summary").value =
+  cart.map(e =>
+    e.details
+      ? `${e.qty} x ${e.item} (${e.details})`
+      : `${e.qty} x ${e.item}`
+  ).join(" | ");
+
+
+</script>
