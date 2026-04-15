@@ -51,8 +51,17 @@ nav a {
 }
 
 .note {
-  font-size: 0.9rem;       /* slightly smaller than normal text */
-  font-style: italic;      /* italicized */
+  font-size: 0.9rem;     
+  font-style: italic;      
+}
+
+#page-message {
+  color: #a5a3a3;
+}
+
+#page-message a {
+  color: #a5a3a3;
+  text-decoration: underline;
 }
 
 .btn {
