@@ -74,6 +74,16 @@ footer {
   font-style: italic;      
 }
 
+button {
+  font-family: 'Courier New';
+  font-size: medium;
+}
+
+select {
+  font-family: 'Courier New';
+  font-size: medium;
+}
+
 #page-message {
   color: #a5a3a3;
 }
