@@ -50,6 +50,11 @@ nav a {
     font-size: 2rem;
 }
 
+.note {
+  font-size: 0.9rem;       /* slightly smaller than normal text */
+  font-style: italic;      /* italicized */
+}
+
 .btn {
     display: inline-block;
     padding: 12px 24px;
@@ -76,6 +81,18 @@ footer {
     max-width: 1000px;
     margin: 0 auto;
     padding: 0 0px;
+}
+
+section ul {
+  list-style: none;
+  padding: 0;
+}
+
+section li {
+  font-size: 1rem;
+  margin: 8px 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #eee;
 }
 
 .image-row {
