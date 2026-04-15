@@ -14,15 +14,15 @@ Light Mocha: #8A6A5A
 
 body {
     margin: 0;
-    font-family: 'Georgia', sans-serif;
-    font-size: 16px;       /* comfortable reading size */
+    font-family: 'Courier New';
+    font-size: 20px;
     line-height: 1.5;
     background-color:#FBF6EC;
-    color:#352f2c;
+    color:#000000;
 }
 
 header {
-    background-color:#7A2E2E;
+    background-color:#8A6A5A;
     padding: 20px;
     text-align: center;
 }
@@ -33,26 +33,40 @@ header h1 {
     color:#E5C86B;
 }
 
-nav a {
-    margin: 0 15px;
-    text-decoration: none;
-    color: #fff;
-    font-weight: bold;
+a {
+  text-decoration: none;
 }
 
-.hero {
+a:hover {
+  text-decoration: underline;
+}
+
+nav a {
+    margin: 0 15px;
+    color: #fff;
+    font-weight: semi-bold;
+}
+
+.hero-front{
     text-align: center;
     padding: 100px 20px;
     background-color: #FBF6EC;
 }
 
+.hero h2 {
+    font-size: 2rem;
+}
+
+footer {
+    background-color: #8A6A5A;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
 .hero-2 {
     padding: 20px 20px;
     background-color: #FBF6EC;
-}
-
-.hero h2 {
-    font-size: 2rem;
 }
 
 .note {
@@ -82,13 +96,6 @@ nav a {
 .intro {
     padding: 40px;
     text-align: center;
-}
-
-footer {
-    background-color: #7A2E2E;
-    color: white;
-    text-align: center;
-    padding: 20px;
 }
 
 .container {
@@ -122,9 +129,10 @@ section li {
 }
 
 .sun-wrapper {
-  text-align: center;    /* centers text inside wrapper */
-  margin: 0 auto;      /* vertical spacing */
+  text-align: center;
+  margin: 0 auto;
 }
+
 /* container cuts off bottom half of sun to make 
 it a ~rising~ sun */
 .sun-container {
@@ -157,15 +165,14 @@ it a ~rising~ sun */
 /* text overlay */
 .sun-text {
   position: absolute; /* overlay sun */
-  top: 68%;           /* adjust to sit nicely over sun */
+  top: 76%;           /* adjust to sit nicely over sun */
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;         /* above sun */
-  /* font-family: 'Palatino Linotype', 'Book Antiqua', serif; */
   font-size: 1.4rem;
-  color: #4b3e2b;
+  color: #000000;
   text-decoration: none;
   cursor: pointer;
-  white-space: nowrap; /* keep text on one line */
+  white-space: nowrap;
 }
 
