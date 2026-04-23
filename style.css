@@ -20,31 +20,47 @@ body {
     background-color:#FBF6EC;
     color:#000000;
 }
-
-header {
-    background-color:#8A6A5A;
-    padding: 20px;
-    text-align: center;
+/* top header in each page */
+.site-header {
+    background-color: #8A6A5A;
+    padding: 20px 0;
 }
 
-header h1 {
-    margin: 0;
+.header-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;  /* stacks child elements inside flex container */
+    align-items: center;    
+    gap: 0px;
+}
+
+.logo {
     font-size: 2.5rem;
-    color:#E5C86B;
+    color: #E5C86B;
+    margin: 0;
+    text-decoration: none;
 }
 
 a {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
-nav a {
-    margin: 0 15px;
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.nav a {
     color: #fff;
-    font-weight: semi-bold;
+    font-weight: 400; 
+    font-size: 1.8rem;
 }
 
 .hero-front{
@@ -70,7 +86,7 @@ footer {
 }
 
 .note {
-  font-size: 0.9rem;     
+  font-size: 1rem;     
   font-style: italic;      
 }
 
@@ -186,3 +202,107 @@ it a ~rising~ sun */
   white-space: nowrap;
 }
 
+.schedule-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+
+    margin-top: 40px;   /* space from header */
+    padding: 0 1rem;    /* prevents edge touching on mobile */
+    margin-bottom: 40px;
+}
+
+.schedule-menu section {
+    text-align: center;
+}
+
+.schedule-menu h2{
+  font-size: 2.2rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.schedule-menu h3{
+  font-size: 1.75rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+.calendar-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+}
+
+/* Stack on mobile */
+@media (max-width: 768px) {
+  .calendar-wrapper {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Individual calendar */
+.calendar {
+  text-align: center;
+}
+
+/* Month title */
+.calendar h2 {
+  margin-bottom: 20px;
+  font-weight: 500;
+  font-size: 1.75rem;
+}
+
+/* Grid layout */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+
+/* Day labels (Sun–Sat) */
+.day.header {
+  font-size: 16px;
+  font-weight: 200;
+}
+
+/* Base day style */
+.day {
+  padding: 10px 0;
+  font-size: 1rem;
+}
+
+/* Empty spacing cells */
+.day.empty {
+  visibility: hidden;
+}
+
+.market-day {
+  border: 1.5px solid black;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.legend {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 1.15rem;
+}
+
+.legend-circle {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid black;
+  border-radius: 50%;
+  margin-right: 8px;
+  vertical-align: middle;
+}
