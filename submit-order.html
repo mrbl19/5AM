@@ -27,16 +27,11 @@
 
 <section class="hero-2">
 
-<!-- todo: h3 is not a thing -->
-<h3>Order Items</h3> 
+<h2>Submit An Order Request</h2> 
 <div class="notice">
   Thank you for your interest! Ordering is not live yet but check back soon 🤍 <br/>
   In the mean time, you can send me a message at hello@5am-bakery.com.<br/><br/>
 </div>
-
-<p id="page-message"></p>
-
-<form>
     
 <label>item:</label>
 <select id="item" onchange="toggleAssorted()">
@@ -74,23 +69,14 @@
 <hr>
 
 <h3>your cart</h3>
-<!-- <button type="button" onclick="resetCart()">clear cart</button> -->
 <ul id="cart"></ul>
 
 <input type="hidden" name="order_summary" id="order_summary">
 
-<div id="cart-error" class="error-message"></div>
-<style>
-.error-message {
-  color: #c0392b;
-  margin-bottom: 10px;
-  font-size: 14px;
-}
-</style>
-
 <button type="button" onclick="goToCheckout()">
   review order
 </button>
+
 </section>
 
 <script>

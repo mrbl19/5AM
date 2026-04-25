@@ -63,14 +63,26 @@ a:hover {
     font-size: 1.8rem;
 }
 
-.hero-front{
+.hero-front{ /* front page, index.html */
     text-align: center;
     padding: 100px 20px;
-    background-color: #FBF6EC;
 }
 
-.hero h2 {
+.hero-front h2{ /* front page, index.html */
+    font-weight: bold;
     font-size: 2rem;
+}
+
+.hero-2 { /* other pages not front page */
+    padding: 20px 20px;
+}
+
+.hero-2 h2 { 
+    font-size: 1.8rem;
+}
+
+.hero-2 h3 { 
+    font-size: 1.4rem;
 }
 
 footer {
@@ -80,14 +92,15 @@ footer {
     padding: 20px;
 }
 
-.hero-2 {
-    padding: 20px 20px;
-    background-color: #FBF6EC;
-}
-
 .note {
   font-size: 1rem;     
   font-style: italic;      
+}
+
+.error-message {
+  color: #c0392b;
+  margin-bottom: 10px;
+  font-size: 14px;
 }
 
 button {
