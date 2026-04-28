@@ -35,33 +35,47 @@
     
 <label>item:</label>
 <!-- select creates a dropdown list -->
-<select id="item" onchange="toggleAssorted()">
-  <option value="apple fritter cookies 4-pack">apple fritter cookies 4-pack</option>
+<select id="item" onchange="toggleCookies()">
+  <option value="lemon olive oil cake (8&quot; round)">lemon olive oil cake (8&quot; round)</option>
   <option value="apple fritter cookies 8-pack">apple fritter cookies 8-pack</option>
-  <option value="golden cream milk bread buns 4-pack">golden cream milk bread buns 4-pack</option>
-  <option value="cinnamon milk bread buns 4-pack">cinnamon milk bread buns 4-pack</option>
-  <option value="assorted cookies 4-pack">assorted cookies 4-pack</option>
-  <option value="assorted cookies 8-pack">assorted cookies 8-pack</option>
-  <option value="cinnamon milk bread loaf">cinnamon milk bread loaf</option>
+  <option value="golden cream milk bread buns 8-pack">golden cream milk bread buns 8-pack</option>
+  <option value="cinnamon milk bread buns 8-pack">cinnamon milk bread buns 8-pack</option>
+  <option value="18-pack custom cookie box">18-pack custom cookie box</option>
+  <option value="18-pack custom browned butter cookie box">18-pack custom browned butter cookie box</option>
 </select>
 
 <label>quantity:</label>
 <input type="number" id="qty" min="1" max="10" value="1">
 
 <!-- Assorted options -->
-<div id="assortedOptions" style="display:none; margin-top:10px;">
+<div id="cookieOptionsR" style="display:none; margin-top:10px;">
   <p><strong>Choose cookies for assorted pack:</strong></p>
 
   Chocolate Chip:
-  <input type="number" class="assorted" data-name="Chocolate Chip" min="0" value="0"><br>
+  <input type="number" class="cookie_flavors" data-name="Chocolate Chip" min="0" value="0"><br>
 
   Red Velvet:
-  <input type="number" class="assorted" data-name="Red Velvet" min="0" value="0"><br>
+  <input type="number" class="cookie_flavors" data-name="Red Velvet" min="0" value="0"><br>
 
   Sugar:
-  <input type="number" class="assorted" data-name="Sugar" min="0" value="0"><br>
+  <input type="number" class="cookie_flavors" data-name="Sugar" min="0" value="0"><br>
 
-  <p id="error" style="color:red;"></p>
+  <p class="error-message"></p>
+</div>
+
+<div id="cookieOptionsB" style="display:none; margin-top:10px;">
+  <p><strong>Choose cookies for assorted pack:</strong></p>
+
+  Chocolate ChipB:
+  <input type="number" class="cookie_flavors" data-name="Chocolate Chip" min="0" value="0"><br>
+
+  Red VelvetB:
+  <input type="number" class="cookie_flavors" data-name="Red Velvet" min="0" value="0"><br>
+
+  SugarB:
+  <input type="number" class="cookie_flavors" data-name="Sugar" min="0" value="0"><br>
+
+  <p class="error-message"></p>
 </div>
 
 <button type="button" onclick="addToCart()">add to cart</button>
@@ -84,39 +98,55 @@
 <script>
 
 let cart = [];
+
+let activeBoxId = null;
 const BOX_RULES = {
-  "assorted cookies 4-pack": 4,
-  "assorted cookies 8-pack": 8,
+  "18-pack custom cookie box": 18,
+  "18-pack custom browned butter cookie box": 18,
 };
 
-function isAssortedBoxItem(item) {
+function isCookieBoxItem(item) {
   return BOX_RULES[item] !== undefined;
 }
 
-function getAssortedBoxSize(item) {
+function getCookieBoxSize(item) {
   return BOX_RULES[item];
 }
 
-function toggleAssorted() {
+function toggleCookies() {
   const item = document.getElementById("item").value;
-  const box = document.getElementById("assortedOptions");
 
-  const isAssorted = isAssortedBoxItem(item);
+  const regularBox = document.getElementById("cookieOptionsR");
+  const brownedBox = document.getElementById("cookieOptionsB");
 
-  box.style.display = isAssorted ? "block" : "none";
+  // hide everything first
+  regularBox.style.display = "none";
+  brownedBox.style.display = "none";
 
-  // reset inputs when switching away
-  if (!isAssorted) {
-    document.querySelectorAll(".assorted").forEach(input => {
-      input.value = 0;
-    });
-
-    document.getElementById("error").textContent = "";
+  if (item === "18-pack custom cookie box") {
+    regularBox.style.display = "block";
+    activeBoxId = "cookieOptionsR";
+  } 
+  else if (item === "18-pack custom browned butter cookie box") {
+    brownedBox.style.display = "block";
+    activeBoxId = "cookieOptionsB";
+  } else {
+    activeBoxId = null;
   }
+
+  // reset all inputs when switching
+  document.querySelectorAll(".cookie_flavors").forEach(input => {
+    input.value = 0;
+  });
+
+  document.getElementById("error").textContent = "";
 }
 
 function getAssortedBreakdown() {
-  const inputs = document.querySelectorAll(".assorted");
+  const inputs = activeBoxId
+  ? document.getElementById(activeBoxId).querySelectorAll(".cookie_flavors")
+  : [];
+
   let total = 0;
   let breakdown = [];
 
@@ -142,11 +172,16 @@ function updateCartError() {
 function addToCart() {
   const item = document.getElementById("item").value;
   const qty = parseInt(document.getElementById("qty").value);
-  const errorEl = document.getElementById("error");
+
+  const activeBox = document.querySelector(
+    "#cookieOptionsR[style*='block'], #cookieOptionsB[style*='block']"
+  );
+
+  const errorEl = activeBox ? activeBox.querySelector(".error-message") : null;
 
   // BOX ITEM (assorted, customizable)
-  if (isAssortedBoxItem(item)) {
-    const boxSize = getAssortedBoxSize(item);
+  if (isCookieBoxItem(item)) {
+    const boxSize = getCookieBoxSize(item);
     const { total, breakdown } = getAssortedBreakdown();
 
     if (total !== boxSize) {
