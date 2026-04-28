@@ -28,12 +28,13 @@
 <section class="hero-2">
 
 <h2>Submit An Order Request</h2> 
-<div class="notice">
+<p>
   Thank you for your interest! Ordering is not live yet but check back soon 🤍 <br/>
   In the mean time, you can send me a message at hello@5am-bakery.com.<br/><br/>
-</div>
+</p>
     
 <label>item:</label>
+<!-- select creates a dropdown list -->
 <select id="item" onchange="toggleAssorted()">
   <option value="apple fritter cookies 4-pack">apple fritter cookies 4-pack</option>
   <option value="apple fritter cookies 8-pack">apple fritter cookies 8-pack</option>
@@ -42,11 +43,10 @@
   <option value="assorted cookies 4-pack">assorted cookies 4-pack</option>
   <option value="assorted cookies 8-pack">assorted cookies 8-pack</option>
   <option value="cinnamon milk bread loaf">cinnamon milk bread loaf</option>
-
 </select>
 
 <label>quantity:</label>
-<input type="number" id="qty" min="1" value="1">
+<input type="number" id="qty" min="1" max="10" value="1">
 
 <!-- Assorted options -->
 <div id="assortedOptions" style="display:none; margin-top:10px;">
@@ -66,12 +66,14 @@
 
 <button type="button" onclick="addToCart()">add to cart</button>
 
-<hr>
+<hr> <!-- horizontal line -->
 
 <h3>your cart</h3>
 <ul id="cart"></ul>
 
 <input type="hidden" name="order_summary" id="order_summary">
+
+<div id="cart-error" class="error-message"></div>
 
 <button type="button" onclick="goToCheckout()">
   review order
@@ -80,45 +82,6 @@
 </section>
 
 <script>
-
-let mode = "normal";
-
-function updatePage() {
-  const message = document.getElementById("page-message");
-
-  if (mode === "normal") {
-    message.innerHTML = `
-      Pre-orders are available for pickup at the farmers market but aren't required.
-      Walk-ups are welcome. Pre-ordering simply ensures you get exactly what you want.<br><br>
-      
-      Are you a CERL employee? 
-      <a href="#" onclick="setCerlMode(); return false;">Click here</a>.<br><br>
-
-      Order request are accepted based on capacity and are not guaranteed.
-      Payment is collected after order confirmation or at the time of pickup.<br><br> 
-    `;
-  } 
-  else if (mode === "cerl") {
-    message.innerHTML = `
-      CERL employees only: Office delivery is available on select Fridays. Orders will be delivered between 12:00-1:00pm. Place your order below!<br><br>
-
-      Clicked the wrong thing? 
-      <a href="#" onclick="setNormalMode(); return false;">Go back here</a>.<br><br>
-    `;
-  } 
-}
-
-function setCerlMode() {
-  mode = "cerl";
-  updatePage();
-}
-
-function setNormalMode() {
-  mode = "normal";
-  updatePage();
-}
-
-updatePage(); // run on load
 
 let cart = [];
 const BOX_RULES = {
@@ -236,6 +199,7 @@ function renderCart() {
       : `${e.qty} x ${e.item}`
   );
 
+  localStorage.setItem("cart", JSON.stringify(cart));
   document.getElementById("order_summary").value = summary.join(" | ");
 }
 
@@ -263,7 +227,6 @@ function goToCheckout() {
 
   // ensure it's saved before navigation
   localStorage.setItem("cart", JSON.stringify(cart));
-
   window.location.href = "checkout.html";
 }
 

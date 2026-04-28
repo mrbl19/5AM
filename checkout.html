@@ -10,18 +10,9 @@
 
 <header class="site-header">
   <div class="header-inner">
-    
     <a href="index.html" class="logo">
       <h1>5AM Bakery</h1>
     </a>
-
-    <!-- <nav class="nav">
-      <a href="index.html">Home</a>
-      <a href="schedule-menu.html">Schedule + Menu</a>
-      <a href="submit-order.html">Submit Order</a>
-      <a href="find-me.html">Find Me</a>
-    </nav> -->
-
   </div>
 </header>
 
@@ -29,37 +20,41 @@
 
 <h2>Review Your Order</h2>
 
-<ul id="orderSummary"></ul>
+<!-- display cart -->
+<ul id="orderList"></ul>
 
-<!-- <button type="button" onclick="restartOrder()">
-  go back
-</button> -->
+<button type="button" onclick="restartOrder()">
+  Start Over
+</button>
 
 <h3>Contact Info</h3>
 
-<form
-  action="https://formspree.io/f/xojyqdwv"
-  method="POST">
+<form action="https://formspree.io/f/xojyqdwv" method="POST">
 
   <input type="text" name="name" placeholder="name" required><br><br>
   <input type="email" name="email" placeholder="email" required><br><br>
 
+  <!-- hidden field for email submission -->
   <input type="hidden" name="order_summary" id="order_summary">
 
   <button type="submit">PLACE ORDER!</button>
 
 </form>
+
 </section>
 
 <script>
 function restartOrder() {
-  localStorage.removeItem("cart"); // clears current order
-  window.location.href = "submit-order.html"; // go back to start
+  localStorage.removeItem("cart");
+  window.location.href = "submit-order.html";
 }
 
-const cart = JSON.parse(localStorage.getItem("cart")) || [];
+const cart = JSON.parse(localStorage.getItem("cart"));
 
-const list = document.getElementById("orderSummary");
+console.log("CART DATA:", cart);
+
+// display list
+const list = document.getElementById("orderList");
 
 cart.forEach(item => {
   const li = document.createElement("li");
@@ -70,7 +65,7 @@ cart.forEach(item => {
   list.appendChild(li);
 });
 
-// send full cart in email
+// build email summary
 document.getElementById("order_summary").value =
   cart.map(e =>
     e.details
@@ -78,5 +73,7 @@ document.getElementById("order_summary").value =
       : `${e.qty} x ${e.item}`
   ).join(" | ");
 
-
 </script>
+
+</body>
+</html>

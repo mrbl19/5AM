@@ -100,7 +100,7 @@ footer {
 .error-message {
   color: #c0392b;
   margin-bottom: 10px;
-  font-size: 14px;
+  font-size: 18px;
 }
 
 button {
@@ -111,15 +111,6 @@ button {
 select {
   font-family: 'Courier New';
   font-size: medium;
-}
-
-#page-message {
-  color: #a5a3a3;
-}
-
-#page-message a {
-  color: #a5a3a3;
-  text-decoration: underline;
 }
 
 .btn {
