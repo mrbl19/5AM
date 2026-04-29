@@ -32,6 +32,22 @@
   Thank you for your interest! Ordering is not live yet but check back soon 🤍 <br/>
   In the mean time, you can send me a message at hello@5am-bakery.com.<br/><br/>
 </p>
+
+<label>Pickup/Delivery Date:</label>
+<select id="order_date" name="order_date">
+  <option value="">make a selection</option>
+  <option value="May 22 2026">May 22 2026</option>
+  <option value="May 29 2026">May 29 2026</option>
+</select>
+<br><br>
+
+<label>Pickup/Delivery Location & Time:</label>
+<select id="order_location" name="order_location">
+  <option value="">make a selection</option>
+  <option value="parking lot (TODO) 12pm - 1pm">parking lot (TODO) 12pm - 1pm</option>
+  <option value="CERL 1pm - 2pm">CERL 1pm - 2pm</option>
+</select>
+<br><br>
     
 <label>item:</label>
 <!-- select creates a dropdown list -->
@@ -284,15 +300,36 @@ function goToCheckout() {
 
   if (errorEl) errorEl.textContent = "";
 
+  let errors = [];
+
+  const date = document.getElementById("order_date").value;
+  const location = document.getElementById("order_location").value;
+
+
   if (!cart || cart.length === 0) {
+    errors.push("Your cart is empty!");
+  }
+
+  if (!date) {
+    errors.push("Please select a date.")
+  }
+
+  if (!location) {
+    errors.push("Please select a location and time.")
+  }
+
+  if (errors.length > 0) {
     if (errorEl) {
-      errorEl.textContent = "Your cart is empty!";
+      errorEl.innerHTML = errors.join("<br>");
     }
     return;
-  }
+  }  
 
   // ensure it's saved before navigation
   localStorage.setItem("cart", JSON.stringify(cart));
+  localStorage.setItem("order_date", date);
+  localStorage.setItem("order_location", location);
+
   window.location.href = "checkout.html";
 }
 

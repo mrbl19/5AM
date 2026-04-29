@@ -20,7 +20,10 @@
 
 <h2>Review Your Order</h2>
 
-<!-- display cart -->
+<p><strong>Date:</strong> <span id="show_date"></span></p>
+<p><strong>Location & Time:</strong> <span id="show_time"></span></p>
+
+<p><strong>Your Cart: </strong>
 <ul id="orderList"></ul>
 
 <button type="button" onclick="restartOrder()">
@@ -36,6 +39,8 @@
 
   <!-- hidden field for email submission -->
   <input type="hidden" name="order_summary" id="order_summary">
+  <input type="hidden" name="order_summary" id="order_summary">
+  <input type="hidden" name="order_summary" id="order_summary">
 
   <button type="submit">PLACE ORDER!</button>
 
@@ -50,8 +55,10 @@ function restartOrder() {
 }
 
 const cart = JSON.parse(localStorage.getItem("cart"));
+const date = localStorage.getItem("order_date");
+const time_location = localStorage.getItem("order_location");
 
-console.log("CART DATA:", cart);
+// console.log("CART DATA:", cart);
 
 // display list
 const list = document.getElementById("orderList");
@@ -72,6 +79,12 @@ document.getElementById("order_summary").value =
       ? `${e.qty} x ${e.item} (${e.details})`
       : `${e.qty} x ${e.item}`
   ).join(" | ");
+
+document.getElementById("show_date").textContent =
+  date || "Not selected";
+
+document.getElementById("show_time").textContent =
+  time_location || "Not selected";
 
 </script>
 
