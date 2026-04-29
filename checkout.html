@@ -39,8 +39,8 @@
 
   <!-- hidden field for email submission -->
   <input type="hidden" name="order_summary" id="order_summary">
-  <input type="hidden" name="order_summary" id="order_summary">
-  <input type="hidden" name="order_summary" id="order_summary">
+  <input type="hidden" name="date" id="date_hidden">
+  <input type="hidden" name="location & time" id="time_location_hidden">
 
   <button type="submit">PLACE ORDER!</button>
 
@@ -72,7 +72,7 @@ cart.forEach(item => {
   list.appendChild(li);
 });
 
-// build email summary
+// hidden inputs for form submission
 document.getElementById("order_summary").value =
   cart.map(e =>
     e.details
@@ -80,6 +80,10 @@ document.getElementById("order_summary").value =
       : `${e.qty} x ${e.item}`
   ).join(" | ");
 
+document.getElementById("date_hidden").value = date || "";
+document.getElementById("time_location_hidden").value = time_location || "";
+
+// to show on page
 document.getElementById("show_date").textContent =
   date || "Not selected";
 
