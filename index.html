@@ -56,6 +56,29 @@
     <p>© 2026 5am Bakery</p>
 </footer>
 
+<!-- image rotation -->
+<script>
+    var imageList = [
+        { src: 'images/cheese_milk.jpg',    alt: 'Cheese milk' },
+        { src: 'images/cinnamon_milk.jpg',  alt: 'Cinnamon milk' },
+    ];
+    var currentIndex = 0;
+    var imgEls = document.querySelectorAll('.image-row img');
+
+    setInterval(function() {
+        imgEls.forEach(function(img) { img.style.opacity = '0'; });
+        setTimeout(function() {
+            currentIndex = (currentIndex + 1) % imageList.length;
+            imgEls[0].src = imageList[currentIndex].src;
+            imgEls[0].alt = imageList[currentIndex].alt;
+            var next = (currentIndex + 1) % imageList.length;
+            imgEls[1].src = imageList[next].src;
+            imgEls[1].alt = imageList[next].alt;
+            imgEls.forEach(function(img) { img.style.opacity = '1'; });
+        }, 800);
+    }, 3500);
+</script>
+
 <!-- sun button animation -->
 <script>
     var sun = document.querySelector('.sun');

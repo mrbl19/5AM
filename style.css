@@ -154,8 +154,16 @@ section li {
 
 .image-row img {
   width: 290px;   /* adjust size here */
+  max-width: 100%;
   height: auto;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: opacity 0.8s ease;
+}
+
+@media (max-width: 640px) {
+  .image-row img:nth-child(2) {
+    display: none;
+  }
 }
 
 .sun-wrapper {
