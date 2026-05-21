@@ -19,6 +19,7 @@ body {
     line-height: 1.5;
     background-color:#FBF6EC;
     color:#000000;
+    font-weight: 500;
 }
 /* top header in each page */
 .site-header {
