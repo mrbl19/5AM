@@ -18,7 +18,7 @@
     <nav class="nav">
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
-      <a href="recipes.html">Recipes</a>
+      <a href="blog.html">Blog/Recipes</a>
       <a href="contact-me.html">Contact Me</a>
     </nav>
 
@@ -27,46 +27,36 @@
 
 <section class="hero-2">
 
-    <div class="image-row">
-    <img src="images/cheese_milk.jpg" alt="Image 1">
-    <img src="images/cinnamon_milk.jpg" alt="Image 2">
-    <img src="images/cheese_milk.jpg" alt="Image 3">
-    </div>
-
     <h2 class="centered">About 5am Bakery</h2>
 
+    <div class="about-layout">
+
+    <div class="about-box">
     <p class="centered">
-    [todo: insert about text]
+    5am Bakery was a small farmers market stand at Urbana's Market at the Square in the spring of 2026. <br> <br>
+
+    For me, it was my own venture that provided me with an outlet for my obsessive, detail-oriented nature.
+    A whimsical daydream brought to life, simply because why not? <br> <br>
+
+    While I no longer operate it, I don't consider it dead. It's <em>dormant</em>. <br> <br>
+
+    It could reawaken, possibly stronger than ever, possibly in a completely different form. <br> <br>
+
+    But it's definitely not dead.
     </p>
+    </div>
+
+    <div class="about-image">
+    <img src="images_about/cin_at_market.jpeg" alt="5am Bakery at the farmers market">
+    </div>
+
+    </div>
 
 </section>
 
 <footer>
     <p>© 2026 5am Bakery</p>
 </footer>
-
-<!-- image rotation -->
-<script>
-    var imageList = [
-        { src: 'images/cheese_milk.jpg',    alt: 'Cheese milk' },
-        { src: 'images/cinnamon_milk.jpg',  alt: 'Cinnamon milk' },
-    ];
-    var currentIndex = 0;
-    var imgEls = document.querySelectorAll('.image-row img');
-
-    setInterval(function() {
-        imgEls.forEach(function(img) { img.style.opacity = '0'; });
-        setTimeout(function() {
-            currentIndex = (currentIndex + 1) % imageList.length;
-            imgEls.forEach(function(img, slot) {
-                var item = imageList[(currentIndex + slot) % imageList.length];
-                img.src = item.src;
-                img.alt = item.alt;
-            });
-            imgEls.forEach(function(img) { img.style.opacity = '1'; });
-        }, 800);
-    }, 3500);
-</script>
 
 </body>
 </html>

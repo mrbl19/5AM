@@ -102,6 +102,29 @@ footer {
   margin: 0 auto;
 }
 
+.about-layout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 2rem auto 0;
+}
+
+.about-box {
+  flex: 1 1 320px;
+}
+
+.about-image {
+  flex: 1 1 320px;
+}
+
+.about-image img {
+  width: 100%;
+  height: auto;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
 .post-nav {
   display: flex;
   justify-content: space-between;
@@ -131,6 +154,7 @@ section li {
   display: flex;
   justify-content: center; /* centers horizontally */
   gap: 15px;
+  margin-bottom: 2rem;
 }
 
 .image-row img {
