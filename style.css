@@ -93,46 +93,26 @@ footer {
     padding: 20px;
 }
 
-.note {
-  font-size: 1rem;     
-  font-style: italic;      
+.centered {
+  text-align: center;
 }
 
-.error-message {
-  color: #c0392b;
-  margin-bottom: 10px;
-  font-size: 18px;
+.contact-box {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.post-nav {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
 }
 
 button {
   font-family: 'Courier New';
   font-size: medium;
-}
-
-select {
-  font-family: 'Courier New';
-  font-size: medium;
-}
-
-.btn {
-    display: inline-block;
-    padding: 12px 24px;
-    margin-top: 20px;
-    background-color: #E5C86B;
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
-}
-
-.intro {
-    padding: 40px;
-    text-align: center;
-}
-
-.container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 0 0px;
 }
 
 section ul {
@@ -215,107 +195,3 @@ it a ~rising~ sun */
   white-space: nowrap;
 }
 
-.schedule-menu {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-
-    margin-top: 40px;   /* space from header */
-    padding: 0 1rem;    /* prevents edge touching on mobile */
-    margin-bottom: 40px;
-}
-
-.schedule-menu section {
-    text-align: center;
-}
-
-.schedule-menu h2{
-  font-size: 2.2rem;
-  text-align: center;
-  font-weight: 600;
-}
-
-.schedule-menu h3{
-  font-size: 1.75rem;
-  text-align: center;
-  font-weight: 500;
-}
-
-.calendar-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
-}
-
-/* Stack on mobile */
-@media (max-width: 768px) {
-  .calendar-wrapper {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Individual calendar */
-.calendar {
-  text-align: center;
-}
-
-/* Month title */
-.calendar h2 {
-  margin-bottom: 20px;
-  font-weight: 500;
-  font-size: 1.75rem;
-}
-
-/* Grid layout */
-.calendar-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 10px;
-}
-
-/* Day labels (Sun–Sat) */
-.day.header {
-  font-size: 16px;
-  font-weight: 200;
-}
-
-/* Base day style */
-.day {
-  padding: 10px 0;
-  font-size: 1rem;
-}
-
-/* Empty spacing cells */
-.day.empty {
-  visibility: hidden;
-}
-
-.market-day {
-  border: 1.5px solid black;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
-}
-
-.legend {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 1.15rem;
-}
-
-.legend-circle {
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  border: 2px solid black;
-  border-radius: 50%;
-  margin-right: 8px;
-  vertical-align: middle;
-}
