@@ -115,6 +115,11 @@ footer {
   flex: 1 1 320px;
 }
 
+.post-box {
+  max-width: 800px;
+  margin: 2rem 0 0;
+}
+
 .about-image {
   flex: 1 1 320px;
 }
